@@ -31,3 +31,7 @@ jobs:
         run: |
           echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
           docker push stefanvasilev2002/projects-kiii-image:latest
+        - name: Deploy to Deployment Environment
+        if: success()
+        run: |
+            docker run -d -p 8000:8000 stefanvasilev2002/projects-kiii-image:latest
