@@ -74,15 +74,14 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 
+import dj_database_url
+import os
+# Read the DATABASE_URL environment variable
+DATABASE_URL = os.getenv('DATABASE_URL')
+
+# Configure the database using dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default=DATABASE_URL)
 }
 
 # Password validation
