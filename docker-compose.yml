@@ -10,8 +10,12 @@ services:
 
   web:
     image: stefanvasilev2002/projects-kiii-image:latest
-    command: gunicorn --bind 0.0.0.0:8000 Projects.wsgi:application
-    volumes:
+    command: >
+      sh -c "
+      python manage.py makemigrations &&
+      python manage.py migrate &&
+      gunicorn --bind 0.0.0.0:8000 Projects.wsgi:application
+      "    volumes:
       - .:/app
     ports:
       - "8000:8000"
