@@ -27,6 +27,3 @@ spec:
             name: projects-service
             port:
               number: 80
-  middlewares:
-  - name: redirectscheme
-    namespace: projects-kiii
